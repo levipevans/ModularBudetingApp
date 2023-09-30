@@ -9,5 +9,6 @@ package coreFeatures;
  *     resources during initialization if possible, so as to make importing big files quicker.
  */
 public class Transaction {
+    int test;
     
 }
