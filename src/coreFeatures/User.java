@@ -18,12 +18,20 @@ public class User {
         accounts[1] = new Account("Savings", BigDecimal.ZERO, true);
     }
 
+    public BigDecimal findNetWorth(){
+        BigDecimal total = BigDecimal.ZERO;
+        for(Account a : accounts){
+            total.add(a.getBalance());
+        }
+        return total;
+    }
+
     public User(){
         //25 default value
         this(25);
     }
 
-    public Account[] geAccounts(){
+    public Account[] getAccounts(){
         return accounts;
     }
 
