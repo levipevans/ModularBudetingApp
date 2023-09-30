@@ -18,6 +18,50 @@ public class Account {
     private boolean hasInterestRate;
     private BigDecimal interestRate;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+    
+    public void addToBalance(BigDecimal balance) {
+        this.balance.add(balance);
+    }
+
+    public Transaction[] getTransactionHistory() {
+        return transactionHistory;
+    }
+
+    public void setTransactionHistory(Transaction[] transactionHistory) {
+        this.transactionHistory = transactionHistory;
+    }
+
+    public boolean isHasInterestRate() {
+        return hasInterestRate;
+    }
+
+    public void setHasInterestRate(boolean hasInterestRate) {
+        this.hasInterestRate = hasInterestRate;
+    }
+
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
     public Account(String name, BigDecimal balance, boolean hasInterestRate){
         this.name = name;
         this.balance = balance;
