@@ -1,0 +1,7 @@
+coreFeatures
+    Main.java
+    Account.java
+    Transaction.java
+
+advancedFeatures
+    Gui.java
