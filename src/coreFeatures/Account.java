@@ -8,5 +8,5 @@ package coreFeatures;
  *     It should also be able to hold future paychecks as well.
  */
 public class Account {
-    
+    private int balance;
 }
