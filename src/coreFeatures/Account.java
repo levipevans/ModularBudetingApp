@@ -46,6 +46,15 @@ public class Account {
         this.transactionHistory = transactionHistory;
     }
 
+    public void addTransaction(Transaction t){
+        Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length + 1];
+        for(int i = 0; i < this.transactionHistory.length; ++i){
+            tempTransactionHistory[i] = transactionHistory[i];
+        }
+        tempTransactionHistory[tempTransactionHistory.length-1] = t;
+        transactionHistory = tempTransactionHistory;
+    }
+
     public boolean isHasInterestRate() {
         return hasInterestRate;
     }
