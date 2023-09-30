@@ -33,7 +33,7 @@ public class Account {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
-    
+
     public void addToBalance(BigDecimal balance) {
         this.balance.add(balance);
     }
@@ -46,12 +46,21 @@ public class Account {
         this.transactionHistory = transactionHistory;
     }
 
-    public void addTransaction(Transaction t){
+    /**
+     * Creates a new temporary array with one extra index. Adds the new transaction
+     * to the last index.
+     * 
+     * @param transaction - The transaction you would like to add to the accounts transaction
+     *          history
+     */
+    public void addTransaction(Transaction transaction) {
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length + 1];
-        for(int i = 0; i < this.transactionHistory.length; ++i){
+
+        for (int i = 0; i < this.transactionHistory.length; ++i) {
             tempTransactionHistory[i] = transactionHistory[i];
         }
-        tempTransactionHistory[tempTransactionHistory.length-1] = t;
+
+        tempTransactionHistory[tempTransactionHistory.length - 1] = transaction;
         transactionHistory = tempTransactionHistory;
     }
 
@@ -71,7 +80,7 @@ public class Account {
         this.interestRate = interestRate;
     }
 
-    public Account(String name, BigDecimal balance, boolean hasInterestRate){
+    public Account(String name, BigDecimal balance, boolean hasInterestRate) {
         this.name = name;
         this.balance = balance;
         this.hasInterestRate = hasInterestRate;
