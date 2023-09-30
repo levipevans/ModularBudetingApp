@@ -2,6 +2,7 @@ coreFeatures
     Main.java
     Account.java
     Transaction.java
+    User.java
 
 advancedFeatures
     Gui.java
