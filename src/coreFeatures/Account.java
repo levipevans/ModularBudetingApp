@@ -18,6 +18,34 @@ public class Account {
     private boolean hasInterestRate;
     private BigDecimal interestRate;
 
+    private String amountHeader;
+    private String dateHeader;
+    private String descriptionHeader;
+
+    public String getAmountHeader() {
+        return amountHeader;
+    }
+
+    public void setAmountHeader(String amountHeader) {
+        this.amountHeader = amountHeader;
+    }
+
+    public String getDateHeader() {
+        return dateHeader;
+    }
+
+    public void setDateHeader(String dateHeader) {
+        this.dateHeader = dateHeader;
+    }
+
+    public String getDescriptionHeader() {
+        return descriptionHeader;
+    }
+
+    public void setDescriptionHeader(String descriptionHeader) {
+        this.descriptionHeader = descriptionHeader;
+    }
+
     public String getName() {
         return name;
     }
@@ -50,8 +78,9 @@ public class Account {
      * Creates a new temporary array with one extra index. Adds the new transaction
      * to the last index.
      * 
-     * @param transaction - The transaction you would like to add to the accounts transaction
-     *          history
+     * @param transaction - The transaction you would like to add to the accounts
+     *                    transaction
+     *                    history
      */
     public void addTransaction(Transaction transaction) {
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length + 1];
