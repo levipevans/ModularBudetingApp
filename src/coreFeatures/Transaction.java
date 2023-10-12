@@ -15,7 +15,7 @@ public class Transaction {
     private BigDecimal amount;
     private LocalDate date;
     private String description;
-    
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -35,6 +35,10 @@ public class Transaction {
         this.description = description;
     }
 
-    
+    Transaction(BigDecimal amount, LocalDate date, String description){
+        this.amount = amount;
+        this.date = date;
+        this.description = description;
+    }
     
 }
