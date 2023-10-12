@@ -79,8 +79,7 @@ public class Account {
      * to the last index.
      * 
      * @param transaction - The transaction you would like to add to the accounts
-     *                    transaction
-     *                    history
+     *                    transaction history
      */
     public void addTransaction(Transaction transaction) {
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length + 1];
