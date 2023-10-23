@@ -51,6 +51,20 @@ public class User {
     public String[] getCategories(){
         return categories;
     }
+    
+    public void setCategories(String[] catagories){
+        this.categories = catagories;
+    }
+
+    public void addCategories(String category){
+        String[] newCategories = new String[getCategories().length + 1];
+
+        for(int i = 0; i < getCategories().length; i++){
+            newCategories[i] = getCategories()[i];
+        }
+        newCategories[newCategories.length-1] = category;
+        setCategories(newCategories);
+    }
 
     public void categorySetSize(int num){
         //save categories and spendingByCategories into buffs
