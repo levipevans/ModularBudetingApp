@@ -3,19 +3,18 @@ package coreFeatures;
 import java.math.BigDecimal;
 
 public class User {
-    private String[] categories = new String[] {"Food", "Snacks and self regret purchases", "Gas", "Entertainment", "Housing", "Subscriptions"};
+    private String[] categories;
 
     private BigDecimal[] spendingByCategory = new BigDecimal[categories.length];
     
     private Account[] accounts;
 
     //set the category size and then make a checkings and savings account
-    public User(int categorySize){
-        categorySetSize(categorySize);
 
-        accounts = new Account[2];
-        accounts[0] = new Account("Checking", BigDecimal.ZERO, false);
-        accounts[1] = new Account("Savings", BigDecimal.ZERO, true);
+    public User(){
+        //default values
+        setCategories(new String[] {"Food", "Gas", "Entertainment", "Housing", "Subscriptions"});
+
     }
 
     public BigDecimal findNetWorth(){
@@ -26,10 +25,7 @@ public class User {
         return total;
     }
 
-    public User(){
-        //25 default value
-        this(25);
-    }
+
 
     public Account[] getAccounts(){
         return accounts;
