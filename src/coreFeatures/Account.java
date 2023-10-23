@@ -63,7 +63,7 @@ public class Account {
     public void calculateBalance(){
         BigDecimal newBalance = BigDecimal.ZERO;
         for (Transaction transaction : transactionHistory) {
-            //TODO: newBalance += transaction.getAmount(); implement in Transaction.java 
+            newBalance = newBalance.add(transaction.getAmount());
         }
         balance = newBalance;
     }
