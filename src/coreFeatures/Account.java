@@ -161,25 +161,16 @@ public class Account {
                 }
             }
 
-            Transaction[] newTransactions = new Transaction[0];
-
             while(scanner.hasNextLine()){
                 String row = scanner.nextLine();
                 String[] rowArray = row.split(",");
 
-                Transaction tempTransaction = new Transaction(
+                addTransaction(new Transaction(
                     BigDecimal.valueOf(Double.parseDouble(rowArray[amountCsvIndex])),
                     LocalDate.parse(rowArray[dateCsvIndex]),
-                    rowArray[descriptionCsvIndex]);
-                
-                    Transaction[] tempTransactions  = new Transaction[newTransactions.length + 1];
-                    for(int i = 0; i < tempTransactions.length - 1; i++){
-                        tempTransactions[i] = newTransactions[i];
-                    }
-                    tempTransactions[tempTransactions.length - 1] = tempTransaction;
-                    newTransactions = tempTransactions;
+                    rowArray[descriptionCsvIndex]));
             }
-            
+
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
