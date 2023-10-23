@@ -92,6 +92,18 @@ public class Account {
         transactionHistory = tempTransactionHistory;
     }
 
+    public void removeTransaction(Transaction transaction){
+        Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length - 1];
+
+        for (int i = 0; i < this.transactionHistory.length; ++i) {
+            if(!transaction.equals(getTransactionHistory()[i])){
+                tempTransactionHistory[i] = transactionHistory[i];
+            }
+        }
+
+        transactionHistory = tempTransactionHistory;
+    }
+
     public boolean isHasInterestRate() {
         return hasInterestRate;
     }
