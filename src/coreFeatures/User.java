@@ -33,20 +33,20 @@ public class User {
         this.accounts = accounts;
     }
 
-    public void removeAccount(int accountIndex){
+    public void removeAccount(int accountIndex) {
         Account[] newAccounts = new Account[getAccounts().length - 1];
-        for(int i = 0; i < getAccounts().length; i++){
-            if(i != accountIndex){
+        for (int i = 0; i < getAccounts().length; i++) {
+            if (i != accountIndex) {
                 newAccounts[i] = getAccounts()[i];
             }
         }
         setAccounts(newAccounts);
     }
 
-    public void removeAccount(Account account){
+    public void removeAccount(Account account) {
         Account[] newAccounts = new Account[getAccounts().length - 1];
-        for(int i = 0; i < getAccounts().length; i++){
-            if(!account.equals(getAccounts()[i])){
+        for (int i = 0; i < getAccounts().length; i++) {
+            if (!account.equals(getAccounts()[i])) {
                 newAccounts[i] = getAccounts()[i];
             }
         }
@@ -70,12 +70,12 @@ public class User {
         this.categories = catagories;
     }
 
-    public void removeCategory(int categoryIndex){
+    public void removeCategory(int categoryIndex) {
         String[] newCategories = new String[getCategories().length - 1];
-        BigDecimal[] newSpending = new BigDecimal[getCategories().length -1];
+        BigDecimal[] newSpending = new BigDecimal[getCategories().length - 1];
 
-        for(int i = 0; i < getCategories().length; i++){
-            if(i != categoryIndex){
+        for (int i = 0; i < getCategories().length; i++) {
+            if (i != categoryIndex) {
                 newCategories[i] = getCategories()[i];
                 newSpending[i] = getSpendingByCategory()[i];
             }
@@ -85,12 +85,12 @@ public class User {
         setSpendingByCategory(newSpending);
     }
 
-        public void removeCategory(String category){
-            String[] newCategories = new String[getCategories().length - 1];
-            BigDecimal[] newSpending = new BigDecimal[getCategories().length - 1];
-            
-        for(int i = 0; i < getCategories().length; i++){
-            if(!getCategories()[i].equals(category)){
+    public void removeCategory(String category) {
+        String[] newCategories = new String[getCategories().length - 1];
+        BigDecimal[] newSpending = new BigDecimal[getCategories().length - 1];
+
+        for (int i = 0; i < getCategories().length; i++) {
+            if (!getCategories()[i].equals(category)) {
                 newCategories[i] = getCategories()[i];
                 newSpending[i] = getSpendingByCategory()[i];
             }
