@@ -40,5 +40,4 @@ public class Transaction {
         this.date = date;
         this.description = description;
     }
-    
 }
