@@ -18,6 +18,35 @@ public class Account {
     private boolean hasInterestRate;
     private BigDecimal interestRate;
 
+    // these headers are the strings that the csv files uses to identify the columns for each data type.
+    private String amountCsvHeader;
+    private String dateCsvHeader;
+    private String descriptionCsvHeader;
+
+    public String getAmountCsvHeader() {
+        return amountCsvHeader;
+    }
+
+    public void setAmountCsvHeader(String amountHeader) {
+        this.amountCsvHeader = amountHeader;
+    }
+
+    public String getDateCsvHeader() {
+        return dateCsvHeader;
+    }
+
+    public void setDateCsvHeader(String dateHeader) {
+        this.dateCsvHeader = dateHeader;
+    }
+
+    public String getDescriptionCsvHeader() {
+        return descriptionCsvHeader;
+    }
+
+    public void setDescriptionCsvHeader(String descriptionHeader) {
+        this.descriptionCsvHeader = descriptionHeader;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,7 +56,16 @@ public class Account {
     }
 
     public BigDecimal getBalance() {
+        calculateBalance();
         return balance;
+    }
+
+    public void calculateBalance(){
+        BigDecimal newBalance = BigDecimal.ZERO;
+        for (Transaction transaction : transactionHistory) {
+            //TODO: newBalance += transaction.getAmount(); implement in Transaction.java 
+        }
+        balance = newBalance;
     }
 
     public void setBalance(BigDecimal balance) {
@@ -50,8 +88,7 @@ public class Account {
      * Creates a new temporary array with one extra index. Adds the new transaction
      * to the last index.
      * 
-     * @param transaction - The transaction you would like to add to the accounts transaction
-     *          history
+     * @param transaction - The transaction you would like to add to the accounts transaction history
      */
     public void addTransaction(Transaction transaction) {
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length + 1];
@@ -61,6 +98,18 @@ public class Account {
         }
 
         tempTransactionHistory[tempTransactionHistory.length - 1] = transaction;
+        transactionHistory = tempTransactionHistory;
+    }
+
+    public void removeTransaction(Transaction transaction){
+        Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length - 1];
+
+        for (int i = 0; i < this.transactionHistory.length; ++i) {
+            if(!transaction.equals(getTransactionHistory()[i])){
+                tempTransactionHistory[i] = transactionHistory[i];
+            }
+        }
+
         transactionHistory = tempTransactionHistory;
     }
 
