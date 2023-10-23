@@ -56,7 +56,16 @@ public class Account {
     }
 
     public BigDecimal getBalance() {
+        calculateBalance();
         return balance;
+    }
+
+    public void calculateBalance(){
+        BigDecimal newBalance = BigDecimal.ZERO;
+        for (Transaction transaction : transactionHistory) {
+            //TODO: newBalance += transaction.getAmount(); 
+        }
+        balance = newBalance;
     }
 
     public void setBalance(BigDecimal balance) {
