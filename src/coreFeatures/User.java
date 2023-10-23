@@ -68,36 +68,59 @@ public class User {
 
     public void setCategories(String[] catagories) {
         this.categories = catagories;
-        // TODO: Update spendingByCategory to match
     }
 
     public void removeCategory(int categoryIndex){
-            String[] newCategories = new String[getCategories().length - 1];
+        String[] newCategories = new String[getCategories().length - 1];
+        BigDecimal[] newSpending = new BigDecimal[getCategories().length -1];
+
         for(int i = 0; i < getCategories().length; i++){
             if(i != categoryIndex){
                 newCategories[i] = getCategories()[i];
+                newSpending[i] = getSpendingByCategory()[i];
             }
         }
+
         setCategories(newCategories);
+        setSpendingByCategory(newSpending);
     }
 
         public void removeCategory(String category){
             String[] newCategories = new String[getCategories().length - 1];
+            BigDecimal[] newSpending = new BigDecimal[getCategories().length - 1];
+            
         for(int i = 0; i < getCategories().length; i++){
             if(!getCategories()[i].equals(category)){
                 newCategories[i] = getCategories()[i];
+                newSpending[i] = getSpendingByCategory()[i];
             }
         }
+
         setCategories(newCategories);
+        setSpendingByCategory(newSpending);
     }
 
     public void addCategories(String category) {
         String[] newCategories = new String[getCategories().length + 1];
+        BigDecimal[] newSpending = new BigDecimal[getCategories().length + 1];
 
         for (int i = 0; i < getCategories().length; i++) {
             newCategories[i] = getCategories()[i];
+            newSpending[i] = getSpendingByCategory()[i];
         }
+
         newCategories[newCategories.length - 1] = category;
         setCategories(newCategories);
+
+        newSpending[newCategories.length - 1] = BigDecimal.ZERO;
+        setSpendingByCategory(newSpending);
+    }
+
+    public BigDecimal[] getSpendingByCategory() {
+        return spendingByCategory;
+    }
+
+    public void setSpendingByCategory(BigDecimal[] spendingByCategory) {
+        this.spendingByCategory = spendingByCategory;
     }
 }
