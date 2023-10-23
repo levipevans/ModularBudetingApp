@@ -54,6 +54,7 @@ public class User {
     
     public void setCategories(String[] catagories){
         this.categories = catagories;
+        //TODO: Update spendingByCategory to match
     }
 
     public void addCategories(String category){
@@ -65,20 +66,4 @@ public class User {
         newCategories[newCategories.length-1] = category;
         setCategories(newCategories);
     }
-
-    public void categorySetSize(int num){
-        //save categories and spendingByCategories into buffs
-        String[] catBuff = categories;
-        categories = new String[num];
-        BigDecimal[] spendBuff = spendingByCategory;
-        spendingByCategory = new BigDecimal[num];
-
-        for(int i = 0; i < catBuff.length && i < spendBuff.length; ++i){
-            categories[i] = catBuff[i];
-            spendingByCategory[i] = spendBuff[i];
-        }
-    }
-
-
-
 }
