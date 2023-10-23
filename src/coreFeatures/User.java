@@ -71,6 +71,26 @@ public class User {
         // TODO: Update spendingByCategory to match
     }
 
+    public void removeCategory(int categoryIndex){
+            String[] newCategories = new String[getCategories().length - 1];
+        for(int i = 0; i < getCategories().length; i++){
+            if(i != categoryIndex){
+                newCategories[i] = getCategories()[i];
+            }
+        }
+        setCategories(newCategories);
+    }
+
+        public void removeCategory(String category){
+            String[] newCategories = new String[getCategories().length - 1];
+        for(int i = 0; i < getCategories().length; i++){
+            if(!getCategories()[i].equals(category)){
+                newCategories[i] = getCategories()[i];
+            }
+        }
+        setCategories(newCategories);
+    }
+
     public void addCategories(String category) {
         String[] newCategories = new String[getCategories().length + 1];
 
