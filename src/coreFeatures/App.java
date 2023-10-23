@@ -8,8 +8,9 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         User user = null;
         String input;
-
-        if(loadUser()){
+        
+        loadUser();
+        while(user == null){
             System.out.println("Hello and welcome to Modular Budgeting App!");
             System.out.print("What would you like to do?\n (1) create a new user\n (2) provide the path to a previously saved user\n (3) exit");
             input = Integer.toString(scanner.nextInt());
