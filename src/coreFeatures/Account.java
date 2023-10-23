@@ -18,32 +18,33 @@ public class Account {
     private boolean hasInterestRate;
     private BigDecimal interestRate;
 
-    private String amountHeader;
-    private String dateHeader;
-    private String descriptionHeader;
+    // these headers are the strings that the csv files uses to identify the columns for each data type.
+    private String amountCsvHeader;
+    private String dateCsvHeader;
+    private String descriptionCsvHeader;
 
-    public String getAmountHeader() {
-        return amountHeader;
+    public String getAmountCsvHeader() {
+        return amountCsvHeader;
     }
 
-    public void setAmountHeader(String amountHeader) {
-        this.amountHeader = amountHeader;
+    public void setAmountCsvHeader(String amountHeader) {
+        this.amountCsvHeader = amountHeader;
     }
 
-    public String getDateHeader() {
-        return dateHeader;
+    public String getDateCsvHeader() {
+        return dateCsvHeader;
     }
 
-    public void setDateHeader(String dateHeader) {
-        this.dateHeader = dateHeader;
+    public void setDateCsvHeader(String dateHeader) {
+        this.dateCsvHeader = dateHeader;
     }
 
-    public String getDescriptionHeader() {
-        return descriptionHeader;
+    public String getDescriptionCsvHeader() {
+        return descriptionCsvHeader;
     }
 
-    public void setDescriptionHeader(String descriptionHeader) {
-        this.descriptionHeader = descriptionHeader;
+    public void setDescriptionCsvHeader(String descriptionHeader) {
+        this.descriptionCsvHeader = descriptionHeader;
     }
 
     public String getName() {
@@ -78,8 +79,7 @@ public class Account {
      * Creates a new temporary array with one extra index. Adds the new transaction
      * to the last index.
      * 
-     * @param transaction - The transaction you would like to add to the accounts
-     *                    transaction history
+     * @param transaction - The transaction you would like to add to the accounts transaction history
      */
     public void addTransaction(Transaction transaction) {
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length + 1];
