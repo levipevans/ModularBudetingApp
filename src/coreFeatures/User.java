@@ -35,6 +35,19 @@ public class User {
         return accounts;
     }
 
+    public void setAccounts(Account[] accounts){
+        this.accounts = accounts;
+    }
+
+    public void addAccount(Account account){
+        Account[] newAccounts = new Account[getAccounts().length + 1];
+        for(int i = 0; i < getAccounts().length; i++){
+            newAccounts[i] = getAccounts()[i];
+        }
+        newAccounts[newAccounts.length-1] = account;
+        setAccounts(newAccounts);
+    }
+
     public String[] getCategories(){
         return categories;
     }
