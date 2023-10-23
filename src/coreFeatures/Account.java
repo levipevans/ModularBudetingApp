@@ -8,7 +8,11 @@ package coreFeatures;
  *     It should also be able to hold future paychecks as well.
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Account {
     String name;
@@ -134,4 +138,53 @@ public class Account {
         this.balance = balance;
         this.hasInterestRate = hasInterestRate;
     }
+
+    public void readCsvFile(String pathString){
+        File file = new File(pathString);
+        try (Scanner scanner = new Scanner(file)) {
+            String csvHeaders = scanner.nextLine();
+            String[] headersArray = csvHeaders.split(",");
+
+            int amountCsvIndex = -1;
+            int dateCsvIndex = -1;
+            int descriptionCsvIndex = -1;
+
+            for(int i = 0; i < headersArray.length; i++){
+                if(headersArray[i].equals(getAmountCsvHeader())){
+                    amountCsvIndex = i;
+                }
+                if(headersArray[i].equals(getDateCsvHeader())){
+                    dateCsvIndex = i;
+                }
+                if(headersArray[i].equals(getDescriptionCsvHeader())){
+                    descriptionCsvIndex = i;
+                }
+            }
+
+            Transaction[] newTransactions = new Transaction[0];
+
+            while(scanner.hasNextLine()){
+                String row = scanner.nextLine();
+                String[] rowArray = row.split(",");
+
+                Transaction tempTransaction = new Transaction(
+                    BigDecimal.valueOf(Double.parseDouble(rowArray[amountCsvIndex])),
+                    LocalDate.parse(rowArray[dateCsvIndex]),
+                    rowArray[descriptionCsvIndex]);
+                
+                    Transaction[] tempTransactions  = new Transaction[newTransactions.length + 1];
+                    for(int i = 0; i < tempTransactions.length - 1; i++){
+                        tempTransactions[i] = newTransactions[i];
+                    }
+                    tempTransactions[tempTransactions.length - 1] = tempTransaction;
+                    newTransactions = tempTransactions;
+            }
+            
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+        
 }
