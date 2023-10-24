@@ -3,14 +3,22 @@ package coreFeatures;
 import java.math.BigDecimal;
 
 public class User {
+    private String name;
+    
     private String[] categories;
-
+    
     private BigDecimal[] spendingByCategory = new BigDecimal[categories.length];
-
+    
     private Account[] accounts;
+    
+    public String getName() {
+        return name;
+    }
 
-    // set the category size and then make a checkings and savings account
-
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public User() {
         // default values
         setCategories(new String[] { "Food", "Gas", "Entertainment", "Housing", "Subscriptions" });
