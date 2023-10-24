@@ -1,6 +1,5 @@
 package coreFeatures;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,6 +18,7 @@ public class App {
         
         loadUser();
         while(user == null){
+            //TODO: extract into method for clarity
             System.out.println("Hello and welcome to Modular Budgeting App!");
             System.out.println("What would you like to do?\n (1) create a new user\n (2) provide the path to a previously saved user\n (3) exit");
             input = Integer.toString(scanner.nextInt());
@@ -33,16 +33,18 @@ public class App {
                         break;
                 case 3: shouldRun = false;
                         break;
+                default: System.out.printf("Sorry %s is not a valid input try entering 1, 2, or 3\n", input);
 
             }
         }
         while(shouldRun){
-            
+            //TODO:Extract into method for clarity --> create sub methods(text menus) relying on switch/case
         }
     }
 
     
     private static void saveUser() throws FileNotFoundException, IOException {
+        //TODO: handle exceptions better so the program does not panic
         ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("./user.ser"));
 
         stream.writeObject(user);
@@ -51,7 +53,6 @@ public class App {
 
 
     private static User createNewUser() {
-        //TODO: implement createNewUser(). This should guide the user through initializing their User.java object.
         User user = new User();
         System.out.println("To begin creating a new user enter your name: ");
         input = scanner.nextLine();
@@ -60,12 +61,16 @@ public class App {
     }
     
     private static void loadUser() throws FileNotFoundException, IOException, ClassNotFoundException {
-        //TODO: implement loadUser() this should be the default logic for loading a user from a program-defined location.
+        //TODO: handle exceptions better so the program does not panic
         ObjectInputStream stream = new ObjectInputStream(new FileInputStream("./user.ser"));
         user = (User)stream.readObject();
         stream.close();
     }
-    private static void loadUser(String input) {
-        //TODO: This overload of loadUser is responsible for loading the user from a user-defined path.
+
+    private static void loadUser(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+        //TODO: handle exceptions better so the program does not panic
+        ObjectInputStream stream = new ObjectInputStream(new FileInputStream(path));
+        user = (User)stream.readObject();
+        stream.close();
     }
 }
