@@ -30,4 +30,16 @@ public class App {
             
         }
     }
+
+    
+    private static void createNewUser() {
+        //TODO: implement createNewUser(). This should guide the user through initializing their User.java object.
+    }
+    
+    private static void loadUser() {
+        //TODO: implement loadUser() this should be the default logic for loading a user from a program-defined location.
+    }
+    private static void loadUser(String input) {
+        //TODO: This overload of loadUser is responsible for loading the user from a user-defined path.
+    }
 }
