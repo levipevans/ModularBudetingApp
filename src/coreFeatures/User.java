@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 /**
  * Represents a user with various financial data and accounts.
  * Implements the Serializable interface for object serialization.
+ * @author Glen "River" Seeber
+ * @author Levi Evans
+ * 
+ * @version 1.0
  */
 public class User implements Serializable {
     private String name;
