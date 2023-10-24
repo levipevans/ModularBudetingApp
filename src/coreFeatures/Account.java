@@ -136,10 +136,16 @@ public class Account {
         this.interestRate = interestRate;
     }
 
-    public Account(String name, BigDecimal balance, boolean hasInterestRate) {
+    public Account(String name, double balance) {
         this.name = name;
-        this.balance = balance;
+        this.balance = BigDecimal.valueOf(balance);
+    }
+
+    public Account(String name, double balance, boolean hasInterestRate, double interestRate) {
+        this.name = name;
+        this.balance = BigDecimal.valueOf(balance);
         this.hasInterestRate = hasInterestRate;
+        this.interestRate = BigDecimal.valueOf(interestRate);
     }
 
     public void readCsvFile(String pathString){
