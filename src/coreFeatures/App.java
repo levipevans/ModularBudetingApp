@@ -3,11 +3,12 @@ package coreFeatures;
 import java.util.Scanner;
 
 public class App {
+        static boolean shouldRun = true;
+        static Scanner scanner = new Scanner(System.in);
+        static User user = null;
+        static String input;
     public static void main(String[] args){
-        boolean shouldRun = true;
-        Scanner scanner = new Scanner(System.in);
-        User user = null;
-        String input;
+
         
         loadUser();
         while(user == null){
@@ -15,7 +16,7 @@ public class App {
             System.out.print("What would you like to do?\n (1) create a new user\n (2) provide the path to a previously saved user\n (3) exit");
             input = Integer.toString(scanner.nextInt());
             switch(Integer.parseInt(input)){
-                case 1: createNewUser();
+                case 1: user = createNewUser();
                         break;
                 case 2: System.out.print("provide path to saved user: ");
                         input = scanner.nextLine();
@@ -32,8 +33,13 @@ public class App {
     }
 
     
-    private static void createNewUser() {
+    private static User createNewUser() {
         //TODO: implement createNewUser(). This should guide the user through initializing their User.java object.
+        User user = new User();
+        System.out.println("To begin creating a new user enter your name: ");
+        user.setName(scanner.nextLine());
+        
+        return user;
     }
     
     private static void loadUser() {
