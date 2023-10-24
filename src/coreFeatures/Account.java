@@ -26,6 +26,9 @@ public class Account {
     private String amountCsvHeader;
     private String dateCsvHeader;
     private String descriptionCsvHeader;
+    private int dateCsvIndex = -1;
+    private int descriptionCsvIndex = -1;
+    private int amountCsvIndex = -1;
 
     public String getAmountCsvHeader() {
         return amountCsvHeader;
@@ -133,10 +136,16 @@ public class Account {
         this.interestRate = interestRate;
     }
 
-    public Account(String name, BigDecimal balance, boolean hasInterestRate) {
+    public Account(String name, double balance) {
         this.name = name;
-        this.balance = balance;
+        this.balance = BigDecimal.valueOf(balance);
+    }
+
+    public Account(String name, double balance, boolean hasInterestRate, double interestRate) {
+        this.name = name;
+        this.balance = BigDecimal.valueOf(balance);
         this.hasInterestRate = hasInterestRate;
+        this.interestRate = BigDecimal.valueOf(interestRate);
     }
 
     public void readCsvFile(String pathString){
@@ -145,37 +154,41 @@ public class Account {
             String csvHeaders = scanner.nextLine();
             String[] headersArray = csvHeaders.split(",");
 
-            int amountCsvIndex = -1;
-            int dateCsvIndex = -1;
-            int descriptionCsvIndex = -1;
+            setHeaderIndexes(headersArray);
 
-            for(int i = 0; i < headersArray.length; i++){
-                if(headersArray[i].equals(getAmountCsvHeader())){
-                    amountCsvIndex = i;
-                }
-                if(headersArray[i].equals(getDateCsvHeader())){
-                    dateCsvIndex = i;
-                }
-                if(headersArray[i].equals(getDescriptionCsvHeader())){
-                    descriptionCsvIndex = i;
-                }
-            }
-
-            while(scanner.hasNextLine()){
-                String row = scanner.nextLine();
-                String[] rowArray = row.split(",");
-
-                addTransaction(new Transaction(
-                    BigDecimal.valueOf(Double.parseDouble(rowArray[amountCsvIndex])),
-                    LocalDate.parse(rowArray[dateCsvIndex]),
-                    rowArray[descriptionCsvIndex]));
-            }
+            addTransactionsFromCsv(scanner);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
+    }
+
+    private void addTransactionsFromCsv(Scanner scanner) {
+        while(scanner.hasNextLine()){
+            String row = scanner.nextLine();
+            String[] rowArray = row.split(",");
+
+            addTransaction(new Transaction(
+                BigDecimal.valueOf(Double.parseDouble(rowArray[amountCsvIndex])),
+                LocalDate.parse(rowArray[dateCsvIndex]),
+                rowArray[descriptionCsvIndex]));
+        }
+    }
+
+    private void setHeaderIndexes(String[] headersArray) {
+        for(int i = 0; i < headersArray.length; i++){
+            if(headersArray[i].equals(getAmountCsvHeader())){
+                amountCsvIndex = i;
+            }
+            if(headersArray[i].equals(getDateCsvHeader())){
+                dateCsvIndex = i;
+            }
+            if(headersArray[i].equals(getDescriptionCsvHeader())){
+                descriptionCsvIndex = i;
+            }
+        }
     }
         
 }
