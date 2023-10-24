@@ -8,7 +8,11 @@ package coreFeatures;
  *     It should also be able to hold future paychecks as well.
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Account {
     String name;
@@ -22,6 +26,9 @@ public class Account {
     private String amountCsvHeader;
     private String dateCsvHeader;
     private String descriptionCsvHeader;
+    private int dateCsvIndex = -1;
+    private int descriptionCsvIndex = -1;
+    private int amountCsvIndex = -1;
 
     public String getAmountCsvHeader() {
         return amountCsvHeader;
@@ -129,9 +136,59 @@ public class Account {
         this.interestRate = interestRate;
     }
 
-    public Account(String name, BigDecimal balance, boolean hasInterestRate) {
+    public Account(String name, double balance) {
         this.name = name;
-        this.balance = balance;
-        this.hasInterestRate = hasInterestRate;
+        this.balance = BigDecimal.valueOf(balance);
     }
+
+    public Account(String name, double balance, boolean hasInterestRate, double interestRate) {
+        this.name = name;
+        this.balance = BigDecimal.valueOf(balance);
+        this.hasInterestRate = hasInterestRate;
+        this.interestRate = BigDecimal.valueOf(interestRate);
+    }
+
+    public void readCsvFile(String pathString){
+        File file = new File(pathString);
+        try (Scanner scanner = new Scanner(file)) {
+            String csvHeaders = scanner.nextLine();
+            String[] headersArray = csvHeaders.split(",");
+
+            setHeaderIndexes(headersArray);
+
+            addTransactionsFromCsv(scanner);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+
+    private void addTransactionsFromCsv(Scanner scanner) {
+        while(scanner.hasNextLine()){
+            String row = scanner.nextLine();
+            String[] rowArray = row.split(",");
+
+            addTransaction(new Transaction(
+                BigDecimal.valueOf(Double.parseDouble(rowArray[amountCsvIndex])),
+                LocalDate.parse(rowArray[dateCsvIndex]),
+                rowArray[descriptionCsvIndex]));
+        }
+    }
+
+    private void setHeaderIndexes(String[] headersArray) {
+        for(int i = 0; i < headersArray.length; i++){
+            if(headersArray[i].equals(getAmountCsvHeader())){
+                amountCsvIndex = i;
+            }
+            if(headersArray[i].equals(getDateCsvHeader())){
+                dateCsvIndex = i;
+            }
+            if(headersArray[i].equals(getDescriptionCsvHeader())){
+                descriptionCsvIndex = i;
+            }
+        }
+    }
+        
 }
