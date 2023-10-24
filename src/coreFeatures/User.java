@@ -1,13 +1,14 @@
 package coreFeatures;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class User {
+public class User implements Serializable{
     private String name;
     
     private String[] categories;
     
-    private BigDecimal[] spendingByCategory = new BigDecimal[categories.length];
+    private BigDecimal[] spendingByCategory;
     
     private Account[] accounts;
     
