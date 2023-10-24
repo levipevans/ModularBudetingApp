@@ -3,15 +3,15 @@ package coreFeatures;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class User implements Serializable{
+public class User implements Serializable {
     private String name;
-    
+
     private String[] categories;
-    
+
     private BigDecimal[] spendingByCategory;
-    
+
     private Account[] accounts;
-    
+
     public String getName() {
         return name;
     }
@@ -19,14 +19,20 @@ public class User implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public User() {
         // default values
         setCategories(new String[] { "Food", "Gas", "Entertainment", "Housing", "Subscriptions" });
 
     }
 
+    /**
+     * 
+     * @return the total of all user's account balances
+     */
     public BigDecimal findNetWorth() {
+        // TODO: this total does not take into account that an account balance could be
+        // a credit or debt
         BigDecimal total = BigDecimal.ZERO;
         for (Account a : accounts) {
             total.add(a.getBalance());
@@ -42,6 +48,11 @@ public class User implements Serializable{
         this.accounts = accounts;
     }
 
+    /**
+     * 
+     * @param accountIndex The index of the account to remove from the user's
+     *                     account array.
+     */
     public void removeAccount(int accountIndex) {
         Account[] newAccounts = new Account[getAccounts().length - 1];
         for (int i = 0; i < getAccounts().length; i++) {
@@ -52,6 +63,11 @@ public class User implements Serializable{
         setAccounts(newAccounts);
     }
 
+    /**
+     * 
+     * @param account the account object to be removed from the user's account
+     *                array.
+     */
     public void removeAccount(Account account) {
         Account[] newAccounts = new Account[getAccounts().length - 1];
         for (int i = 0; i < getAccounts().length; i++) {
@@ -62,6 +78,10 @@ public class User implements Serializable{
         setAccounts(newAccounts);
     }
 
+    /**
+     * 
+     * @param account The account to add to the user's accounts array.
+     */
     public void addAccount(Account account) {
         Account[] newAccounts = new Account[getAccounts().length + 1];
         for (int i = 0; i < getAccounts().length; i++) {
@@ -79,6 +99,11 @@ public class User implements Serializable{
         this.categories = catagories;
     }
 
+    /**
+     * Removes a category and its related spendingByCategory entry from their respective arrays.
+     * @param categoryIndex the index of the user's category and spendingByCategory
+     *                      arrays to be removed.
+     */
     public void removeCategory(int categoryIndex) {
         String[] newCategories = new String[getCategories().length - 1];
         BigDecimal[] newSpending = new BigDecimal[getCategories().length - 1];
@@ -94,6 +119,11 @@ public class User implements Serializable{
         setSpendingByCategory(newSpending);
     }
 
+    /**
+     * Removes a category and its related spendingByCategory entry from their respective arrays.
+     * @param category The category and the spendingByCategory entry with the same
+     *                 index to be removed.
+     */
     public void removeCategory(String category) {
         String[] newCategories = new String[getCategories().length - 1];
         BigDecimal[] newSpending = new BigDecimal[getCategories().length - 1];
@@ -109,6 +139,10 @@ public class User implements Serializable{
         setSpendingByCategory(newSpending);
     }
 
+    /**
+     * Adds a category to the categories array and a related location in the user's spendingByCategory array.
+     * @param category The category to be added
+     */
     public void addCategories(String category) {
         String[] newCategories = new String[getCategories().length + 1];
         BigDecimal[] newSpending = new BigDecimal[getCategories().length + 1];
