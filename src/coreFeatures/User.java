@@ -2,7 +2,10 @@ package coreFeatures;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
+/**
+ * Represents a user with various financial data and accounts.
+ * Implements the Serializable interface for object serialization.
+ */
 public class User implements Serializable {
     private String name;
 
