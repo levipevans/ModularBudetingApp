@@ -157,13 +157,12 @@ public class Account {
      * 
      * @param name The name of the account.
      * @param balance The initial balance.
-     * @param hasInterestRate Indicates if the account has an interest rate.
      * @param interestRate The interest rate, if applicable.
      */
-    public Account(String name, double balance, boolean hasInterestRate, double interestRate) {
+    public Account(String name, double balance, double interestRate) {
         this.name = name;
         this.balance = BigDecimal.valueOf(balance);
-        this.hasInterestRate = hasInterestRate;
+        this.hasInterestRate = true;
         this.interestRate = BigDecimal.valueOf(interestRate);
     }
 
