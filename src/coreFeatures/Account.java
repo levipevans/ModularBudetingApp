@@ -1,12 +1,4 @@
 package coreFeatures;
-/*
- * Will represent a single account, either checking or savings (or whatever).
- * 
- * Should hold data like account balance, transaction history, and future transactions.
- * 
- * Can partition balance into sections of what you can use, and what is needed to be spent on bills.
- *     It should also be able to hold future paychecks as well.
- */
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +6,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Represents an account with financial details and transaction history.
+ * Supports reading transaction data from CSV files.
+ * 
+ * @author Levi Evans
+ * @version 1.0
+ */
 public class Account {
     String name;
     private BigDecimal balance;
@@ -67,6 +66,9 @@ public class Account {
         return balance;
     }
 
+    /**
+     * Recalculates and updates the balance of the account based on the transaction history.
+     */
     public void calculateBalance(){
         BigDecimal newBalance = BigDecimal.ZERO;
         for (Transaction transaction : transactionHistory) {
@@ -92,10 +94,9 @@ public class Account {
     }
 
     /**
-     * Creates a new temporary array with one extra index. Adds the new transaction
-     * to the last index.
+     * Adds a transaction to the account's transaction history.
      * 
-     * @param transaction - The transaction you would like to add to the accounts transaction history
+     * @param transaction The transaction to add.
      */
     public void addTransaction(Transaction transaction) {
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length + 1];
@@ -108,6 +109,11 @@ public class Account {
         transactionHistory = tempTransactionHistory;
     }
 
+    /**
+     * Removes a specific transaction from the account's transaction history.
+     * 
+     * @param transaction The transaction to remove.
+     */
     public void removeTransaction(Transaction transaction){
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length - 1];
 
@@ -135,19 +141,36 @@ public class Account {
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
     }
-
+/**
+     * Constructs an account with a name and initial balance.
+     * 
+     * @param name The name of the account.
+     * @param balance The initial balance.
+     */
     public Account(String name, double balance) {
         this.name = name;
         this.balance = BigDecimal.valueOf(balance);
     }
-
-    public Account(String name, double balance, boolean hasInterestRate, double interestRate) {
+    
+/**
+     * Constructs an account with a name, initial balance, and interest rate details.
+     * 
+     * @param name The name of the account.
+     * @param balance The initial balance.
+     * @param interestRate The interest rate, if applicable.
+     */
+    public Account(String name, double balance, double interestRate) {
         this.name = name;
         this.balance = BigDecimal.valueOf(balance);
-        this.hasInterestRate = hasInterestRate;
+        this.hasInterestRate = true;
         this.interestRate = BigDecimal.valueOf(interestRate);
     }
 
+    /**
+     * Reads transaction data from a CSV file and adds them to the account.
+     * 
+     * @param pathString The file path of the CSV file.
+     */
     public void readCsvFile(String pathString){
         File file = new File(pathString);
         try (Scanner scanner = new Scanner(file)) {
