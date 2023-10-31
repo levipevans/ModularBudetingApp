@@ -38,10 +38,22 @@ public class User implements Serializable {
      * @return the total of all user's account balances
      */
     public BigDecimal findNetWorth() {
-        // TODO: this total does not take into account that an account balance could be a credit or debt
+        // TODO: test that this properly takes into account if the total is being accounted for.
+
         BigDecimal total = BigDecimal.ZERO;
         for (Account a : accounts) {
-            total.add(a.getBalance());
+            switch (a.getAccountType()) {
+                case debit:
+                    total.add(a.getBalance());
+                    break;
+                case credit:
+                    total.subtract(a.getBalance());
+                    break;
+            
+                default:
+                    System.out.println(a.getName() + ": did not have a account type (debit, credit...)");
+                    break;
+            }
         }
         return total;
     }
