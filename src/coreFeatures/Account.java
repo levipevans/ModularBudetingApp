@@ -182,7 +182,7 @@ public class Account {
             addTransactionsFromCsv(scanner);
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            System.out.println("error on Account.readCsvFile(String pathString): ");
             e.printStackTrace();
         }
         

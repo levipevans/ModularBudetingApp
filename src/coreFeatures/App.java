@@ -69,7 +69,7 @@ public class App {
             stream.writeObject(user);
             stream.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            System.out.println("error on App.saveUser(): ");
             e.printStackTrace();
         }
     }
@@ -80,7 +80,7 @@ public class App {
             user = (User) stream.readObject();
             stream.close();
         } catch (ClassNotFoundException | IOException e) {
-            // TODO Auto-generated catch block
+            System.out.println("error on App.loadUser(): ");
             e.printStackTrace();
         }
     }
@@ -91,7 +91,7 @@ public class App {
             user = (User) stream.readObject();
             stream.close();
         } catch (ClassNotFoundException | IOException e) {
-            // TODO Auto-generated catch block
+            System.out.println("error on App.loadUser(String path): ");
             e.printStackTrace();
         }
     }
