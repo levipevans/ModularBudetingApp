@@ -17,8 +17,18 @@ public class App {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         loadUser();
+        initUser();
+        mainLoop();
+    }
+
+    private static void mainLoop() {
+        while (shouldRun) {
+            // relying on switch/case
+        }
+    }
+
+    private static void initUser() {
         while (user == null) {
-            // TODO: extract into method for clarity
             System.out.println("Hello and welcome to Modular Budgeting App!");
             System.out.println(
                     "What would you like to do?\n (1) create a new user\n (2) provide the path to a previously saved user\n (3) exit");
@@ -42,10 +52,7 @@ public class App {
 
             }
         }
-        while (shouldRun) {
-            // TODO:Extract into method for clarity --> create sub methods(text menus)
-            // relying on switch/case
-        }
+        
     }
 
     private static User createNewUser() {
@@ -56,25 +63,36 @@ public class App {
         return user;
     }
     
-    private static void saveUser() throws FileNotFoundException, IOException {
-        // TODO: handle exceptions better so the program does not panic
-        ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("./user.ser"));
-
-        stream.writeObject(user);
-        stream.close();
+    private static void saveUser() {
+        try (
+        ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("./user.ser"))) {
+            stream.writeObject(user);
+            stream.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
-    private static void loadUser() throws FileNotFoundException, IOException, ClassNotFoundException {
-        // TODO: handle exceptions better so the program does not panic
-        ObjectInputStream stream = new ObjectInputStream(new FileInputStream("./user.ser"));
-        user = (User) stream.readObject();
-        stream.close();
+    private static void loadUser() {
+        try (
+        ObjectInputStream stream = new ObjectInputStream(new FileInputStream("./user.ser"))) {
+            user = (User) stream.readObject();
+            stream.close();
+        } catch (ClassNotFoundException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
-    private static void loadUser(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
-        // TODO: handle exceptions better so the program does not panic
-        ObjectInputStream stream = new ObjectInputStream(new FileInputStream(path));
-        user = (User) stream.readObject();
-        stream.close();
+    private static void loadUser(String path) {
+        try (
+        ObjectInputStream stream = new ObjectInputStream(new FileInputStream(path))) {
+            user = (User) stream.readObject();
+            stream.close();
+        } catch (ClassNotFoundException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
