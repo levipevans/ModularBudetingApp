@@ -51,7 +51,7 @@ public class User implements Serializable {
                     break;
             
                 default:
-                    System.out.println(a.getName() + ": did not have a account type (debit, credit...)");
+                    System.out.println(a.getName() + ": did not have an accounted for account type (debit, credit...)");
                     break;
             }
         }
