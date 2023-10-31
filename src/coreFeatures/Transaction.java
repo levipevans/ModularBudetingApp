@@ -37,10 +37,11 @@ public class Transaction {
     public void setDescription(String description) {
         this.description = description;
     }
+
     /**
      * 
-     * @param amount the amount associated with the transaction
-     * @param date the date of the transaction
+     * @param amount      the amount associated with the transaction
+     * @param date        the date of the transaction
      * @param description the description or memo of the transaction.
      */
     Transaction(BigDecimal amount, LocalDate date, String description) {

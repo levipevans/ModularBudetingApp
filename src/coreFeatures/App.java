@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class App {
-    static boolean shouldRun = false;
+    static boolean shouldRun = true;
     static Scanner scanner = new Scanner(System.in);
     static User user = null;
     static String input;
@@ -23,7 +23,29 @@ public class App {
 
     private static void mainLoop() {
         while (shouldRun) {
-            // relying on switch/case
+            System.out.println("Hello " + user.getName() + " would you like to do?");
+            System.out.println("(1)");
+            input = scanner.nextLine();
+            try {
+                switch (Integer.parseInt(input)) {
+                    case 1:
+                        // TODO: Add Account
+                        break;
+                    case 2:
+                        // TODO: Import Transactions
+                        break;
+                    case 3:
+                        // TODO: Analyze Spending (Reality and Goals?)
+                        break;
+
+                    default:
+                        shouldRun = false;
+                        break;
+                }
+            } catch (Exception e) {
+                shouldRun = false;
+            }
+
         }
     }
 
@@ -52,7 +74,7 @@ public class App {
 
             }
         }
-        
+
     }
 
     private static User createNewUser() {
@@ -62,10 +84,10 @@ public class App {
         user.setName(input);
         return user;
     }
-    
+
     private static void saveUser() {
         try (
-        ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("./user.ser"))) {
+                ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("./user.ser"))) {
             stream.writeObject(user);
             stream.close();
         } catch (IOException e) {
@@ -76,18 +98,17 @@ public class App {
 
     private static void loadUser() {
         try (
-        ObjectInputStream stream = new ObjectInputStream(new FileInputStream("./user.ser"))) {
+                ObjectInputStream stream = new ObjectInputStream(new FileInputStream("./user.ser"))) {
             user = (User) stream.readObject();
             stream.close();
         } catch (ClassNotFoundException | IOException e) {
-            System.out.println("error on App.loadUser(): ");
-            e.printStackTrace();
+            System.out.println("No default user found.");
         }
     }
 
     private static void loadUser(String path) {
         try (
-        ObjectInputStream stream = new ObjectInputStream(new FileInputStream(path))) {
+                ObjectInputStream stream = new ObjectInputStream(new FileInputStream(path))) {
             user = (User) stream.readObject();
             stream.close();
         } catch (ClassNotFoundException | IOException e) {

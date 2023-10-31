@@ -21,14 +21,16 @@ public class Account {
     private boolean hasInterestRate;
     private BigDecimal interestRate;
 
-    // these headers are the strings that the csv files uses to identify the columns for each data type.
+    // these headers are the strings that the csv files uses to identify the columns
+    // for each data type.
     private String amountCsvHeader;
     private String dateCsvHeader;
     private String descriptionCsvHeader;
     private int dateCsvIndex = -1;
     private int descriptionCsvIndex = -1;
     private int amountCsvIndex = -1;
-    //TODO: Add account types: credit, debit.
+
+    // TODO: Add account types: credit, debit.
     public String getAmountCsvHeader() {
         return amountCsvHeader;
     }
@@ -67,9 +69,10 @@ public class Account {
     }
 
     /**
-     * Recalculates and updates the balance of the account based on the transaction history.
+     * Recalculates and updates the balance of the account based on the transaction
+     * history.
      */
-    public void calculateBalance(){
+    public void calculateBalance() {
         BigDecimal newBalance = BigDecimal.ZERO;
         for (Transaction transaction : transactionHistory) {
             newBalance = newBalance.add(transaction.getAmount());
@@ -114,11 +117,11 @@ public class Account {
      * 
      * @param transaction The transaction to remove.
      */
-    public void removeTransaction(Transaction transaction){
+    public void removeTransaction(Transaction transaction) {
         Transaction[] tempTransactionHistory = new Transaction[this.transactionHistory.length - 1];
 
         for (int i = 0; i < this.transactionHistory.length; ++i) {
-            if(!transaction.equals(getTransactionHistory()[i])){
+            if (!transaction.equals(getTransactionHistory()[i])) {
                 tempTransactionHistory[i] = transactionHistory[i];
             }
         }
@@ -141,22 +144,24 @@ public class Account {
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
     }
-/**
+
+    /**
      * Constructs an account with a name and initial balance.
      * 
-     * @param name The name of the account.
+     * @param name    The name of the account.
      * @param balance The initial balance.
      */
     public Account(String name, double balance) {
         this.name = name;
         this.balance = BigDecimal.valueOf(balance);
     }
-    
-/**
-     * Constructs an account with a name, initial balance, and interest rate details.
+
+    /**
+     * Constructs an account with a name, initial balance, and interest rate
+     * details.
      * 
-     * @param name The name of the account.
-     * @param balance The initial balance.
+     * @param name         The name of the account.
+     * @param balance      The initial balance.
      * @param interestRate The interest rate, if applicable.
      */
     public Account(String name, double balance, double interestRate) {
@@ -171,7 +176,7 @@ public class Account {
      * 
      * @param pathString The file path of the CSV file.
      */
-    public void readCsvFile(String pathString){
+    public void readCsvFile(String pathString) {
         File file = new File(pathString);
         try (Scanner scanner = new Scanner(file)) {
             String csvHeaders = scanner.nextLine();
@@ -185,33 +190,33 @@ public class Account {
             System.out.println("error on Account.readCsvFile(String pathString): ");
             e.printStackTrace();
         }
-        
+
     }
 
     private void addTransactionsFromCsv(Scanner scanner) {
-        while(scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             String row = scanner.nextLine();
             String[] rowArray = row.split(",");
 
             addTransaction(new Transaction(
-                BigDecimal.valueOf(Double.parseDouble(rowArray[amountCsvIndex])),
-                LocalDate.parse(rowArray[dateCsvIndex]),
-                rowArray[descriptionCsvIndex]));
+                    BigDecimal.valueOf(Double.parseDouble(rowArray[amountCsvIndex])),
+                    LocalDate.parse(rowArray[dateCsvIndex]),
+                    rowArray[descriptionCsvIndex]));
         }
     }
 
     private void setHeaderIndexes(String[] headersArray) {
-        for(int i = 0; i < headersArray.length; i++){
-            if(headersArray[i].equals(getAmountCsvHeader())){
+        for (int i = 0; i < headersArray.length; i++) {
+            if (headersArray[i].equals(getAmountCsvHeader())) {
                 amountCsvIndex = i;
             }
-            if(headersArray[i].equals(getDateCsvHeader())){
+            if (headersArray[i].equals(getDateCsvHeader())) {
                 dateCsvIndex = i;
             }
-            if(headersArray[i].equals(getDescriptionCsvHeader())){
+            if (headersArray[i].equals(getDescriptionCsvHeader())) {
                 descriptionCsvIndex = i;
             }
         }
     }
-        
+
 }

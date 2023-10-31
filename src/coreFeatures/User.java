@@ -2,9 +2,11 @@ package coreFeatures;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
 /**
  * Represents a user with various financial data and accounts.
  * Implements the Serializable interface for object serialization.
+ * 
  * @author Glen "River" Seeber
  * @author Levi Evans
  * 
@@ -38,7 +40,8 @@ public class User implements Serializable {
      * @return the total of all user's account balances
      */
     public BigDecimal findNetWorth() {
-        // TODO: this total does not take into account that an account balance could be a credit or debt
+        // TODO: this total does not take into account that an account balance could be
+        // a credit or debt
         BigDecimal total = BigDecimal.ZERO;
         for (Account a : accounts) {
             total.add(a.getBalance());
@@ -106,7 +109,9 @@ public class User implements Serializable {
     }
 
     /**
-     * Removes a category and its related spendingByCategory entry from their respective arrays.
+     * Removes a category and its related spendingByCategory entry from their
+     * respective arrays.
+     * 
      * @param categoryIndex the index of the user's category and spendingByCategory
      *                      arrays to be removed.
      */
@@ -126,7 +131,9 @@ public class User implements Serializable {
     }
 
     /**
-     * Removes a category and its related spendingByCategory entry from their respective arrays.
+     * Removes a category and its related spendingByCategory entry from their
+     * respective arrays.
+     * 
      * @param category The category and the spendingByCategory entry with the same
      *                 index to be removed.
      */
@@ -146,7 +153,9 @@ public class User implements Serializable {
     }
 
     /**
-     * Adds a category to the categories array and a related location in the user's spendingByCategory array.
+     * Adds a category to the categories array and a related location in the user's
+     * spendingByCategory array.
+     * 
      * @param category The category to be added
      */
     public void addCategories(String category) {
