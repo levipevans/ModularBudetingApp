@@ -29,7 +29,7 @@ public class App {
             try {
                 switch (Integer.parseInt(input)) {
                     case 1:
-                        // TODO: Add Account
+                        menuAddAccount();
                         break;
                     case 2:
                         // TODO: Import Transactions
@@ -47,6 +47,9 @@ public class App {
             }
 
         }
+    }
+
+    private static void menuAddAccount() {
     }
 
     private static void initUser() {
