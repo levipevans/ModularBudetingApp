@@ -28,7 +28,7 @@ public class Account {
     private int dateCsvIndex = -1;
     private int descriptionCsvIndex = -1;
     private int amountCsvIndex = -1;
-
+    //TODO: Add account types: credit, debit.
     public String getAmountCsvHeader() {
         return amountCsvHeader;
     }

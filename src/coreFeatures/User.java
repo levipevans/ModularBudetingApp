@@ -38,8 +38,7 @@ public class User implements Serializable {
      * @return the total of all user's account balances
      */
     public BigDecimal findNetWorth() {
-        // TODO: this total does not take into account that an account balance could be
-        // a credit or debt
+        // TODO: this total does not take into account that an account balance could be a credit or debt
         BigDecimal total = BigDecimal.ZERO;
         for (Account a : accounts) {
             total.add(a.getBalance());
